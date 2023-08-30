@@ -5,7 +5,8 @@ use geojson::{Feature, GeoJson, Geometry, Position, Value};
 
 // currentCoord, coordIndex, featureIndex, multiFeatureIndex, geometryIndex
 
-type Callback = fn(current_coord: &Position, coord_index: usize, feature_index: usize, multi_feature_index: usize, geometry_index: usize) -> bool;
+
+// pub type Callback = Fn(&Position, usize, usize, usize, usize) -> bool;
 
 fn get_wrap_shrink(exclude_wrap_coord: bool, gemo: &Value) -> usize {
     if !exclude_wrap_coord {
@@ -17,7 +18,10 @@ fn get_wrap_shrink(exclude_wrap_coord: bool, gemo: &Value) -> usize {
     }
 }
 
-fn e(features: &Vec<Feature>, cb: &Callback, exclude_wrap_coord: bool) {
+fn e<F>(features: &Vec<Feature>, mut cb: F, exclude_wrap_coord: bool)
+    where
+        F: FnMut(&Position, usize, usize, usize, usize) -> bool
+{
     let mut coord_index: usize = 0;
     let mut multi_feature_index: usize = 0;
     let mut geometry_index: usize = 0;
@@ -113,13 +117,13 @@ fn e(features: &Vec<Feature>, cb: &Callback, exclude_wrap_coord: bool) {
                 }
             }
         }
-
-
-
     }
 }
 
-pub fn coord_each(geojson: &GeoJson, cb: &Callback, exclude_wrap_coord: bool) -> () {
+pub fn coord_each<F>(geojson: &GeoJson, mut cb: F, exclude_wrap_coord: bool)
+    where
+        F: FnMut(&Position, usize, usize, usize, usize) -> bool
+{
     match geojson {
         GeoJson::Geometry(_) => {
             // e(vec![g])
@@ -162,18 +166,18 @@ pub(crate) mod tests {
     }
 
     #[test]
-    fn coord_each_point() {
-        // let int_array = [1,2,3,4];
-        // int_array.map(|i| {
-        //     i + 1
-        // });
+    fn coord_each__point() {
+        let int_array = [1, 2, 3, 4];
+        int_array.map(|i| {
+            i + 1
+        });
 
-        let input = geojson::GeoJson::FeatureCollection(collection(&pt()));
-        let cb: Callback = |coord, index, v, b, x| {
+        println!("{}", 222);
+        let input = GeoJson::FeatureCollection(collection(&pt()));
+        coord_each(&input, |coord: &Position, index: usize, v: usize, b: usize, x: usize| {
             assert_eq!(coord, &vec![1.000, 2.000]);
             assert_eq!(index, 0);
             return false;
-        };
-        coord_each(&input, &cb, false)
+        }, false)
     }
 }
