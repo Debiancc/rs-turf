@@ -167,12 +167,12 @@ pub(crate) mod tests {
 
     #[test]
     fn coord_each__point() {
-        let int_array = [1, 2, 3, 4];
-        int_array.map(|i| {
-            i + 1
-        });
-
-        println!("{}", 222);
+        // let int_array = [1, 2, 3, 4];
+        // int_array.map(|i| {
+        //     i + 1
+        // });
+        //
+        // println!("{}", 222);
         let input = GeoJson::FeatureCollection(collection(&pt()));
         coord_each(&input, |coord: &Position, index: usize, v: usize, b: usize, x: usize| {
             assert_eq!(coord, &vec![1.000, 2.000]);
