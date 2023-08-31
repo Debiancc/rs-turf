@@ -21,6 +21,20 @@ pub fn prop_each<F>(geojson: &GeoJson, mut cb: F)
     }
 }
 
+pub fn prop_reduce<T, F>(geojson: &GeoJson, mut cb: F, initial_value: T) -> T
+    where
+        F: FnMut(&T, &Option<JsonObject>, usize) -> T
+{
+    let mut previous_value = initial_value;
+    prop_each(
+        geojson,
+        |props, index| {
+            previous_value = cb(&previous_value, props, index);
+            return true;
+        });
+    previous_value
+}
+
 
 #[cfg(test)]
 pub(crate) mod tests {
