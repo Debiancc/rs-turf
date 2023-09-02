@@ -1,0 +1,17 @@
+pub enum Units {
+    Meters,
+    Metres,
+    Millimeters,
+    Millimetres,
+    Centimeters,
+    Centimetres,
+    Kilometers,
+    Kilometres,
+    Miles,
+    Nauticalmiles,
+    Inches,
+    Yards,
+    Feet,
+    Radians,
+    Degrees,
+}

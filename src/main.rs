@@ -6,6 +6,8 @@ mod feature_each;
 mod along;
 mod helper;
 mod bearing;
+mod destination;
+mod types;
 
 
 fn main() {}
