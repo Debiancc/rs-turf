@@ -9,7 +9,7 @@ pub fn coord_reduce<T, F>(geojson: &GeoJson, mut cb: F, initial_value: T, exclud
     coord_each(
         geojson,
         |coord: &geojson::Position, coord_index: usize, v: usize, b: usize, x: usize| {
-            previous_value = cb(&previous_value, coord, coord_index, v, b, x);
+            previous_value = cb(&mut previous_value, coord, coord_index, v, b, x);
             return true;
         },
         exclude_wrap_coord);
