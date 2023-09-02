@@ -29,6 +29,10 @@ pub fn degrees_to_radians(degrees: f64) -> f64 {
     (radians * PI) / 180.
 }
 
-pub fn length_to_radians(distance: f64, units: Units) -> f64 {
-    distance / factors(units)
+pub fn length_to_radians(distance: f64, units: Option<Units>) -> f64 {
+    distance / factors(units.unwrap_or(Units::Kilometers))
+}
+
+pub fn radians_to_length(distance: f64, units: Option<Units>) -> f64 {
+    distance * factors(units.unwrap_or(Units::Kilometers))
 }
