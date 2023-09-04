@@ -11,6 +11,7 @@ mod types;
 mod distance;
 mod angle;
 mod rhumb_bearing;
+mod meta;
 
 
 fn main() {}
