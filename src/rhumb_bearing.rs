@@ -19,7 +19,7 @@ fn calc(s: &Position, e: &Position) -> f64 {
         phi2 / 2. + PI / 4.
     ).tan() / (
         phi1 / 2. + PI / 4.
-    ).tan()).ln();
+    ).tan()).log(10.);
 
     let theta = delta_lambda.atan2(delta_psi);
     (radians_to_degrees(theta) + 360.) % 360.
