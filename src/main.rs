@@ -12,6 +12,7 @@ mod distance;
 mod angle;
 mod rhumb_bearing;
 mod meta;
+mod area;
 
 
 fn main() {}
