@@ -52,3 +52,11 @@ pub fn length_to_radians(distance: f64, units: Option<&Units>) -> f64 {
 pub fn radians_to_length(distance: f64, units: Option<&Units>) -> f64 {
     distance * units.factor()
 }
+
+pub fn bearing_to_azimuth(bearing: f64) -> f64 {
+    let angle = bearing % 360.;
+    if angle < 0. {
+        return angle + 360.;
+    }
+    angle
+}
