@@ -1,7 +1,19 @@
 use std::f64::consts::PI;
+use geojson::{GeoJson, Value};
+use geojson::GeoJson::Feature;
 use crate::types::Units;
 
 pub const EARTH_RADIUS: f64 = 6371008.8;
+
+pub fn new_feature(g: Value) -> geojson::Feature {
+    geojson::Feature{
+        bbox: None,
+        geometry: Some(geojson::Geometry::new(g)),
+        id: None,
+        properties: None,
+        foreign_members: None,
+    }
+}
 
 impl Units {
     fn factor(&self) -> f64 {

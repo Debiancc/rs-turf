@@ -69,7 +69,7 @@ fn e<F>(features: &Vec<Feature>, mut cb: F, exclude_wrap_coord: bool)
                                 // }
 
 
-                                if cb(&coord[1], coord_index, feature_index, multi_feature_index, geometry_index) == false {
+                                if cb(&coord[k], coord_index, feature_index, multi_feature_index, geometry_index) == false {
                                     return;
                                 }
                                 coord_index += 1;

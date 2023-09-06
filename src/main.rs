@@ -13,6 +13,7 @@ mod angle;
 mod rhumb_bearing;
 mod meta;
 mod area;
+mod bbox;
 
 
 fn main() {}
