@@ -120,6 +120,11 @@ pub(crate) mod tests {
         assert_eq!(bbox(&GeoJson::Feature(multi_line.clone()), false), vec![100., 0., 103., 3.,]);
         assert_eq!(bbox(&GeoJson::Feature(multi_poly.clone()), false), vec![100., 0., 103., 3.,]);
 
+        let mut point_2 = point.clone();
+        point_2.bbox = Some(vec![6.,3.,2.,4.]);
+        assert_eq!(bbox(&GeoJson::Feature(point_2.clone()), false), vec![6.,3.,2.,4.], "default case");
+        assert_eq!(bbox(&GeoJson::Feature(point_2), true), vec![102., 0.5, 102., 0.5,], "recompute case");
+
         let fc = FeatureCollection(geojson::FeatureCollection{
             bbox: None,
             features: vec![point, line, poly, multi_line, multi_poly],
@@ -127,6 +132,9 @@ pub(crate) mod tests {
         });
 
         assert_eq!(bbox(&fc, false), vec![100., -10., 130., 4.,]);
+
+
+
 
 
     }
