@@ -14,6 +14,7 @@ mod rhumb_bearing;
 mod meta;
 mod area;
 mod bbox;
+mod center;
 
 
 fn main() {}
