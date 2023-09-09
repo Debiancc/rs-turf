@@ -1,5 +1,4 @@
-use std::f64::INFINITY;
-use geojson::{Bbox, GeoJson};
+use geojson::{Bbox, GeoJson, PolygonType};
 use crate::coord_each::coord_each;
 
 pub fn bbox(geojson: &GeoJson, recompute: bool) -> Bbox {
@@ -44,6 +43,22 @@ pub fn bbox(geojson: &GeoJson, recompute: bool) -> Bbox {
     }, false);
 
     return result;
+}
+
+pub fn bbox_polygon(bbox: Bbox) -> PolygonType {
+    let west = bbox[0];
+    let south = bbox[1];
+    let east = bbox[2];
+    let north = bbox[3];
+
+    return vec![
+        vec![
+            vec![west, south],
+            vec![west, north],
+            vec![east, north],
+            vec![east, south],
+        ]
+    ]
 }
 
 
